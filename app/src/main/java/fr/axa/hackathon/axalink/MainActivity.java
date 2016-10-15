@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.FileOutputStream;
@@ -35,7 +36,10 @@ public class MainActivity extends AppCompatActivity {
         yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                question.setText("Est-ce un "+ mDBhelper.getListLine().get(iterate).getSousTitres()+" ?");
+                if(iterate>= 2){
+                    Intent intent = new Intent(MainActivity.this,FindedActivity.class);
+                    startActivity(intent);
+                }else question.setText("Est-ce un "+ mDBhelper.getListLine().get(iterate).getSousTitres()+" ?");
                 iterate++;
             }
         });
@@ -45,9 +49,9 @@ public class MainActivity extends AppCompatActivity {
         no.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                question.setText("Est-ce un "+ mDBhelper.getListLine().get(iterate).getSousTitres()+" ?");
+           question.setText("Est-ce un "+ mDBhelper.getListLine().get(iterate).getSousTitres()+" ?");
                 iterate++;
+
             }
         });
         //button unknow
@@ -57,6 +61,18 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 question.setText("Est-ce un "+ mDBhelper.getListLine().get(iterate).getSousTitres()+" ?");
                 iterate++;
+            }
+        });
+
+        // button hamburger
+        ImageView hamburger = (ImageView) findViewById(R.id.home);
+
+        hamburger.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,BeginingActivity.class);
+                finish();
+                startActivity(intent);
             }
         });
 

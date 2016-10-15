@@ -22,7 +22,7 @@
         android:layout_width="40dp"
         android:layout_height="50dp"
         app:srcCompat="@drawable/hamburger"
-        android:layout_marginLeft="290dp"
+        android:layout_marginLeft="335dp"
         android:id="@+id/hamburger"
         />
 </LinearLayout>

@@ -14,7 +14,6 @@ public class BeginingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_begining);
-
         //button pro
 
         ImageButton pro = (ImageButton)findViewById(R.id.pro);
@@ -22,7 +21,7 @@ public class BeginingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(BeginingActivity.this,MainActivity.class);
-                finish();
+
                 startActivity(intent);
 
             }
@@ -33,7 +32,7 @@ public class BeginingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(BeginingActivity.this,MainActivity.class);
-                finish();
+
                 startActivity(intent);
 
             }
@@ -45,11 +44,18 @@ public class BeginingActivity extends AppCompatActivity {
         hamburger.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+
             }
         });
-    }
+        hamburger.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(BeginingActivity.this,HamburgerActivity.class);
+                startActivity(intent);
+            }
+    });
 
 
 
+}
 }
