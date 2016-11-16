@@ -18,7 +18,8 @@ import fr.axa.hackathon.axalink.database.DBHandler;
 
 public class MainActivity extends AppCompatActivity {
     private DBHandler mDBhelper;
-    private static int iterate =0;
+    private static int iterate = 0;
+    private static int counter = 0;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -30,17 +31,31 @@ public class MainActivity extends AppCompatActivity {
         copyDatabase(this);
         //text
         final TextView question = (TextView) findViewById(R.id.question);
-
+        question.setText(mDBhelper.getListLine().get(0).getSousTitres());
         // button yes
         Button yes = (Button) findViewById(R.id.yes);
         yes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(iterate>= 2){
-                    Intent intent = new Intent(MainActivity.this,FindedActivity.class);
+
+                if(counter!=0) {
+                    iterate++;
+                }else iterate--;
+
+                counter++;
+
+                if (iterate == 3 && counter == 4) {
+                    Intent intent = new Intent(MainActivity.this, FindedActivity.class);
+                    finish();
                     startActivity(intent);
-                }else question.setText("Est-ce un "+ mDBhelper.getListLine().get(iterate).getSousTitres()+" ?");
-                iterate++;
+                } else if(counter == 4){
+                    Intent intent = new Intent(MainActivity.this,NotFoundActivity.class);
+                    finish();
+                    startActivity(intent);
+                }else
+                    question.setText(mDBhelper.getListLine().get(counter).getSousTitres());
+
+
             }
         });
 
@@ -49,8 +64,14 @@ public class MainActivity extends AppCompatActivity {
         no.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-           question.setText("Est-ce un "+ mDBhelper.getListLine().get(iterate).getSousTitres()+" ?");
-                iterate++;
+                counter++;
+                if(counter == 4){
+                    Intent intent = new Intent(MainActivity.this,NotFoundActivity.class);
+                    finish();
+                    startActivity(intent);
+                }else
+                question.setText(mDBhelper.getListLine().get(counter).getSousTitres());
+
 
             }
         });
@@ -59,18 +80,26 @@ public class MainActivity extends AppCompatActivity {
         unknow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                question.setText("Est-ce un "+ mDBhelper.getListLine().get(iterate).getSousTitres()+" ?");
-                iterate++;
+                counter++;
+                if(counter == 4) {
+                    Intent intent = new Intent(MainActivity.this, NotFoundActivity.class);
+                    finish();
+                    startActivity(intent);
+                }else
+                question.setText(mDBhelper.getListLine().get(counter).getSousTitres());
+
             }
         });
 
-        // button hamburger
-        ImageView hamburger = (ImageView) findViewById(R.id.home);
 
-        hamburger.setOnClickListener(new View.OnClickListener() {
+
+        // button home
+        ImageView home = (ImageView) findViewById(R.id.home);
+
+        home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,BeginingActivity.class);
+                Intent intent = new Intent(MainActivity.this, BeginingActivity.class);
                 finish();
                 startActivity(intent);
             }
@@ -100,4 +129,12 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
     }
+
+public void onStart(){
+    super.onStart();
+    counter = 0;
+    iterate = 0;
+
+}
+
 }

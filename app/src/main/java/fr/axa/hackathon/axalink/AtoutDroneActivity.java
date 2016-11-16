@@ -6,12 +6,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 
-public class NotFoundActivity extends AppCompatActivity {
+public class AtoutDroneActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_not_found);
+        setContentView(R.layout.activity_atout_drone);
 
         // button home
         ImageView home = (ImageView) findViewById(R.id.home);
@@ -19,22 +19,10 @@ public class NotFoundActivity extends AppCompatActivity {
         home.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(NotFoundActivity.this, BeginingActivity.class);
+                Intent intent = new Intent(AtoutDroneActivity.this, BeginingActivity.class);
                 finish();
                 startActivity(intent);
             }
         });
-        // button reclamation
-        ImageView reclamation = (ImageView)findViewById(R.id.reclamation);
-        reclamation.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(NotFoundActivity.this,ReclamationActivity.class);
-                finish();
-                startActivity(intent);
-            }
-        });
-
     }
-
 }
